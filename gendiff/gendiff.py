@@ -16,4 +16,4 @@ def generate_diff(first_file, second_file):
             diff.append(f'  - {key}: {file_1[key]}')
         else:
             diff.append(f'    {key}: {file_1[key]}')
-    print("{\n" + "\n".join(diff) + "\n}")
+    return ("{\n" + "\n".join(diff).lower() + "\n}")
