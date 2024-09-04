@@ -11,5 +11,3 @@ def read_files(first_file, second_file):
     file1 = read_file(first_file)
     file2 = read_file(second_file)
     return file1, file2
-
-# print(read_files('gendiff/files/file1.yml', 'gendiff/files/file2.yml'))

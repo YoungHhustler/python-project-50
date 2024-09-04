@@ -16,6 +16,3 @@ def generate_diff(first_file, second_file):
         else:
             diff.append(f'    {key}: {file1[key]}')
     return ("{\n" + "\n".join(diff).lower() + "\n}")
-
-
-print(generate_diff('gendiff/files/file1.yaml', 'gendiff/files/file2.yaml'))
