@@ -1,18 +1,12 @@
 from gendiff.path import read_files
+from gendiff.build_diff import build_diff
+# from gendiff.formater.stylish import get_format
 
 
-def generate_diff(first_file, second_file):
+def generate_diff(first_file, second_file, format='stylish'):
     file1, file2 = read_files(first_file, second_file)
-    keys = sorted(set(file1 | file2))
-    diff = []
-    for key in keys:
-        if key in file2 and key not in file1:
-            diff.append(f'  + {key}: {file2[key]}')
-        elif key in file2 and key in file1 and file1[key] != file2[key]:
-            diff.append(f'  - {key}: {file1[key]}')
-            diff.append(f'  + {key}: {file2[key]}')
-        elif key not in file2:
-            diff.append(f'  - {key}: {file1[key]}')
-        else:
-            diff.append(f'    {key}: {file1[key]}')
-    return ("{\n" + "\n".join(diff).lower() + "\n}")
+    diff = build_diff(file1, file2)
+    return print(diff)
+
+
+generate_diff('gendiff/files/file1_tree.yml', 'gendiff/files/file2_tree.yml')
