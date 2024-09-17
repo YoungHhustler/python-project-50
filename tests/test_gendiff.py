@@ -2,31 +2,20 @@ import pytest
 from gendiff.diff import generate_diff
 
 
-FILE1_JSON = 'gendiff/files/file1.json'
-FILE2_JSON = 'gendiff/files/file2.json'
-FILE1_YAML = 'gendiff/files/file1.yaml'
-FILE2_YAML = 'gendiff/files/file2.yaml'
+def read_file(filepath):
+    with open(filepath) as file:
+        return file.read()
 
 
-def test_generate_diff_json():
-    diff = generate_diff(FILE1_JSON, FILE2_JSON)
-    assert diff == '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
-
-
-def test_generate_diff_yaml():
-    diff = generate_diff(FILE1_YAML, FILE2_YAML)
-    assert diff == '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
+@pytest.mark.parametrize(
+    "file1, file2, format, expected", [
+        ("tests/fixtures/file1_tree.json", "tests/fixtures/file2_tree.json", 'stylish', read_file('tests/fixtures/correct_result_stylish.txt')),
+        ("tests/fixtures/file1_tree.json", "tests/fixtures/file2_tree.json", 'plane', read_file('tests/fixtures/correct_result_plane.txt')),
+        ("tests/fixtures/file1_tree.json", "tests/fixtures/file2_tree.json", 'json', read_file('tests/fixtures/correct_result_json.txt')),
+        ("tests/fixtures/file1_tree.yml", "tests/fixtures/file2_tree.yml", 'stylish', read_file('tests/fixtures/correct_result_stylish.txt')),
+        ("tests/fixtures/file1_tree.yml", "tests/fixtures/file2_tree.yml", 'plane', read_file('tests/fixtures/correct_result_plane.txt')),
+        ("tests/fixtures/file1_tree.yml", "tests/fixtures/file2_tree.yml", 'json', read_file('tests/fixtures/correct_result_json.txt'))
+    ]
+)
+def test_generate_diff(file1, file2, format, expected):
+    assert generate_diff(file1, file2, format) == expected
