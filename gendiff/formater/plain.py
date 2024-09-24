@@ -1,4 +1,4 @@
-def get_plane(diff, path=''):
+def get_plain(diff, path=''):
     lines = []
     for key, val in diff.items():
         property_path = f"{path}{key}"
@@ -9,7 +9,7 @@ def get_plane(diff, path=''):
         if val['type'] == 'removed':
             lines.append(f"Property '{property_path}' was removed")
         if val['type'] == 'nested':
-            nested_value = get_plane(val['value'], f"{property_path}.")
+            nested_value = get_plain(val['value'], f"{property_path}.")
             lines.append(f"{nested_value}")
         if val['type'] == 'changed':
             lines.append(f"Property '{property_path}' was updated. "

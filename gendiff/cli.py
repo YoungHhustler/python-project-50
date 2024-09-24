@@ -10,6 +10,6 @@ def parse_args():
     parser.add_argument('-f', '--format',
                         default='stylish',
                         help='set format of output',
-                        choices=['stylish', 'plane', 'json'],
+                        choices=['stylish', 'plain', 'json'],
                         )
     return parser.parse_args()
