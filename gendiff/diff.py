@@ -6,7 +6,7 @@ from gendiff.formater.json import get_json
 from gendiff.pars import parsing
 
 
-def generate_diff(first_file, second_file, format):
+def generate_diff(first_file, second_file, format="stylish"):
     data1, extension = read(first_file)
     data2, extension = read(second_file)
     paresed_data_1 = parsing(data1, extension)
