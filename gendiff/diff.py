@@ -3,7 +3,7 @@ from gendiff.build_diff import build_diff
 from gendiff.formater.stylish import get_stylish
 from gendiff.formater.plain import get_plain
 from gendiff.formater.json import get_json
-from gendiff.pars import parsing
+from gendiff.parser import parsing
 
 
 def generate_diff(first_file, second_file, format="stylish"):
